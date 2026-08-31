@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/Core/">
+    <Project Path="src/Core/Agriculture.Application/Agriculture.Application.csproj" />
+    <Project Path="src/Core/Agriculture.Domain/Agriculture.Domain.csproj" />
+  </Folder>
+  <Folder Name="/External/">
+    <Project Path="src/External/Agriculture.Infrastructure/Agriculture.Infrastructure.csproj" />
+    <Project Path="src/External/Agriculture.Seeding/Agriculture.Seeding.csproj" />
+  </Folder>
+  <Project Path="src/Agriculture.API/Agriculture.API.csproj" />
+</Solution>
