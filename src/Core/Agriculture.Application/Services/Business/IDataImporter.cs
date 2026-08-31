@@ -2,6 +2,7 @@
 {
     public interface IDataImporter
     {
-        IReadOnlyList<T> Read<T>(string sheetName) where T : class, new();
+        IReadOnlyList<T> Read<T>(string sheetName)
+            where T : class, new();
     }
 }

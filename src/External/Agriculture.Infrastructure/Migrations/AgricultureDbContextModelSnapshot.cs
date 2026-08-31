@@ -125,18 +125,18 @@ namespace Agriculture.Infrastructure.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
-                    b.Property<int>("Level")
-                        .HasColumnType("integer");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("PlayerId")
-                        .HasColumnType("integer");
-
                     b.Property<Guid>("PublicId")
                         .HasColumnType("uuid");
+
+                    b.Property<int>("RequiredCoin")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("RequiredLevel")
+                        .HasColumnType("integer");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");

@@ -1,4 +1,5 @@
 using Agriculture.Infrastructure;
+using Agriculture.Seeding;
 using DotNetEnv;
 using Microsoft.OpenApi.Models;
 using System.Text.Json.Serialization;
@@ -18,6 +19,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddSeeding();
 
 builder.Services.ConfigureHttpJsonOptions(options =>
 {
@@ -58,7 +60,13 @@ builder.Services.AddSwaggerGen(c =>
 
 var otpSecret = builder.Configuration["OTP_SECRET_KEY"];
 
+
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    await scope.ServiceProvider.InitialiseDatabaseAsync();
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

@@ -11,6 +11,8 @@ namespace Agriculture.Infrastructure.Context
     {
 
         public DbSet<Player> Players { get; set; } = null!;
+        public DbSet<PlayerFarm> PlayerFarms { get; set; } = null!;
+
         public DbSet<Farm> Farms { get; set; } = null!;
         public DbSet<FarmPlot> FarmPlots { get; set; } = null!;
 

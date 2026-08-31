@@ -3,7 +3,7 @@ using Agriculture.Domain.Models;
 
 namespace Agriculture.Domain.Entities.Territoy
 {
-    public class FarmPlot : SoftDeletableEntity
+    public partial class FarmPlot : SoftDeletableEntity
     {
         public int FarmId { get; private set; }
 
