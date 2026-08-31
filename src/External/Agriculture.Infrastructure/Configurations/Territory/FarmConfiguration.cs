@@ -18,11 +18,6 @@ namespace Agriculture.Infrastructure.Configurations.Territory
 
             builder.Property(x => x.PublicId)
                 .IsRequired();
-
-            builder.HasOne(x => x.Player)
-                .WithOne(x => x.Farm)
-                .HasForeignKey<Farm>(x => x.PlayerId)
-                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

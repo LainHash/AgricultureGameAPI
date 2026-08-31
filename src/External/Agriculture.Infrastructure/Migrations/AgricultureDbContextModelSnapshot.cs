@@ -51,13 +51,58 @@ namespace Agriculture.Infrastructure.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("Username")
+                    b.Property<string>("UserName")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
                     b.ToTable("Players", (string)null);
+                });
+
+            modelBuilder.Entity("Agriculture.Domain.Entities.Guest.PlayerFarm", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("FarmId")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<int>("PlayerId")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("PublicId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("UnlockedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FarmId");
+
+                    b.HasIndex("PlayerId", "FarmId")
+                        .IsUnique();
+
+                    b.ToTable("PlayerFarms", (string)null);
                 });
 
             modelBuilder.Entity("Agriculture.Domain.Entities.Territoy.Farm", b =>
@@ -100,9 +145,6 @@ namespace Agriculture.Infrastructure.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PlayerId")
-                        .IsUnique();
 
                     b.ToTable("Farms", (string)null);
                 });
@@ -150,13 +192,21 @@ namespace Agriculture.Infrastructure.Migrations
                     b.ToTable("FarmPlots", (string)null);
                 });
 
-            modelBuilder.Entity("Agriculture.Domain.Entities.Territoy.Farm", b =>
+            modelBuilder.Entity("Agriculture.Domain.Entities.Guest.PlayerFarm", b =>
                 {
-                    b.HasOne("Agriculture.Domain.Entities.Guest.Player", "Player")
-                        .WithOne("Farm")
-                        .HasForeignKey("Agriculture.Domain.Entities.Territoy.Farm", "PlayerId")
+                    b.HasOne("Agriculture.Domain.Entities.Territoy.Farm", "Farm")
+                        .WithMany("PlayerFarms")
+                        .HasForeignKey("FarmId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Agriculture.Domain.Entities.Guest.Player", "Player")
+                        .WithMany("PlayerFarms")
+                        .HasForeignKey("PlayerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Farm");
 
                     b.Navigation("Player");
                 });
@@ -174,13 +224,14 @@ namespace Agriculture.Infrastructure.Migrations
 
             modelBuilder.Entity("Agriculture.Domain.Entities.Guest.Player", b =>
                 {
-                    b.Navigation("Farm")
-                        .IsRequired();
+                    b.Navigation("PlayerFarms");
                 });
 
             modelBuilder.Entity("Agriculture.Domain.Entities.Territoy.Farm", b =>
                 {
                     b.Navigation("FarmPlots");
+
+                    b.Navigation("PlayerFarms");
                 });
 #pragma warning restore 612, 618
         }

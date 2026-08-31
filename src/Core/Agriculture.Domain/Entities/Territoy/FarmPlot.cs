@@ -5,12 +5,12 @@ namespace Agriculture.Domain.Entities.Territoy
 {
     public class FarmPlot : SoftDeletableEntity
     {
-        public int FarmId { get; set; }
+        public int FarmId { get; private set; }
 
-        public int X { get; set; }
-        public int Y { get; set; }
-        public FarmPlotState State { get; set; }
+        public int X { get; private set; }
+        public int Y { get; private set; }
+        public FarmPlotState State { get; private set; }
 
-        public Farm Farm { get; set; } = null!;
+        public Farm Farm { get; private set; } = null!;
     }
 }

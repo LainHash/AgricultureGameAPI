@@ -5,10 +5,10 @@ namespace Agriculture.Domain.Entities.Guest
 {
     public class Player : SoftDeletableEntity
     {
-        public string Username { get; set; } = null!;
-        public int Level { get; set; }
-        public long Experience { get; set; }
+        public string UserName { get; private set; } = null!;
+        public int Level { get; private set; }
+        public long Experience { get; private set; }
 
-        public Farm Farm { get; set; } = null!;
+        public ICollection<PlayerFarm> PlayerFarms { get; private set; } = [];
     }
 }
