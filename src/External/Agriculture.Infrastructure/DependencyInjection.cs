@@ -1,4 +1,6 @@
+using Agriculture.Application.Services.Business;
 using Agriculture.Infrastructure.Context;
+using Agriculture.Infrastructure.Sevices.Business;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -49,7 +51,8 @@ namespace Agriculture.Infrastructure
             //}
 
             // ── Services ─────────────────────────────────────────────────────
-            
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IDataImporter, ExcelImporter>();
 
             // ── Authentication & Security ────────────────────────────────────
             //services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
