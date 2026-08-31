@@ -11,7 +11,6 @@ namespace Agriculture.Domain.Entities.Territoy
         public int Y { get; set; }
         public FarmPlotState State { get; set; }
 
-
         public Farm Farm { get; set; } = null!;
     }
 }

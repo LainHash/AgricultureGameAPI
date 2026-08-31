@@ -13,5 +13,6 @@ namespace Agriculture.Domain.Entities.Territoy
         public int Level { get; set; }
 
         public Player Player { get; set; } = null!;
+        public ICollection<FarmPlot> FarmPlots { get; set; } = null!;
     }
 }
