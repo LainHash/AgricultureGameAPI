@@ -1,5 +1,7 @@
 using Agriculture.Application.Services.Business;
+using Agriculture.Domain.Repositories;
 using Agriculture.Infrastructure.Context;
+using Agriculture.Infrastructure.Repositories;
 using Agriculture.Infrastructure.Sevices.Business;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -29,7 +31,7 @@ namespace Agriculture.Infrastructure
             //services.AddScoped<ICloudinaryService, CloudinaryService>();
 
             // ── Repositories ─────────────────────────────────────────────────
-            //services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
             //var assembly = typeof(ProductCategoryRepository).Assembly;
 
