@@ -20,10 +20,14 @@ namespace Agriculture.Seeding.Seeders.Guest
                 return;
 
             var players = await context.Players
-                .Select(x => new { x.Id, x.UserName })
+                .Join(context.Users,
+                      p => p.UserId,
+                      u => u.Id,
+                      (p, u) => new { p.Id, u.UserName })
                 .ToDictionaryAsync(
                     x => x.UserName,
                     StringComparer.OrdinalIgnoreCase);
+
             var farms = await context.Farms
                 .Select(x => new { x.Id, x.Name })
                 .ToDictionaryAsync(

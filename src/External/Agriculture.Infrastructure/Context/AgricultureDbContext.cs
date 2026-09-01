@@ -1,4 +1,5 @@
 ﻿using Agriculture.Domain.Entities.Guest;
+using Agriculture.Domain.Entities.Identity;
 using Agriculture.Domain.Entities.Territoy;
 using Agriculture.Domain.Models;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,8 @@ namespace Agriculture.Infrastructure.Context
     public class AgricultureDbContext(DbContextOptions<AgricultureDbContext> options) 
         : DbContext(options)
     {
+        public DbSet<User> Users { get; set; } = null!;
+        public DbSet<Role> Roles { get; set; } = null!;
 
         public DbSet<Player> Players { get; set; } = null!;
         public DbSet<PlayerFarm> PlayerFarms { get; set; } = null!;

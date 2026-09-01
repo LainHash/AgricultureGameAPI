@@ -1,5 +1,6 @@
 using Agriculture.Infrastructure.Context;
 using Agriculture.Seeding.Seeders.Guest;
+using Agriculture.Seeding.Seeders.Identity;
 using Agriculture.Seeding.Seeders.Territory;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -14,6 +15,9 @@ namespace Agriculture.Seeding.Seeders
 
         public async Task SeedAllAsync()
         {
+            await SeedAsync<RoleSeeder>(_context);
+            await SeedAsync<UserSeeder>(_context);
+
             await SeedAsync<PlayerSeeder>(_context);
 
             await SeedAsync<FarmSeeder>(_context);

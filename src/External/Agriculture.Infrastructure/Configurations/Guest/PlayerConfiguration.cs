@@ -18,6 +18,11 @@ namespace Agriculture.Infrastructure.Configurations.Guest
 
             builder.Property(x => x.PublicId)
                 .IsRequired();
+
+            builder.HasOne(x => x.User)
+                .WithOne(x => x.Player)
+                .HasForeignKey<Player>(x => x.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
