@@ -3,10 +3,10 @@
 namespace Agriculture.Domain.Enums
 {
     [JsonConverter(typeof(JsonStringEnumConverter))]
-    public enum FarmPlotState
+    public enum SortField
     {
-        Locked,
-        Empty,
-        Planted
+        CreatedAt,
+        Name,
+        Price
     }
 }
