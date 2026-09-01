@@ -2,6 +2,7 @@ using Agriculture.Application.Services.Business;
 using Agriculture.Domain.Repositories;
 using Agriculture.Infrastructure.Context;
 using Agriculture.Infrastructure.Repositories;
+using Agriculture.Infrastructure.Repositories.Territory;
 using Agriculture.Infrastructure.Sevices.Business;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -33,24 +34,24 @@ namespace Agriculture.Infrastructure
             // ── Repositories ─────────────────────────────────────────────────
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
-            //var assembly = typeof(ProductCategoryRepository).Assembly;
+            var assembly = typeof(FarmRepository).Assembly;
 
-            //foreach (var type in assembly.GetTypes())
-            //{
-            //    if (!type.IsClass || type.IsAbstract)
-            //        continue;
+            foreach (var type in assembly.GetTypes())
+            {
+                if (!type.IsClass || type.IsAbstract)
+                    continue;
 
-            //    if (!type.Name.EndsWith("Repository"))
-            //        continue;
+                if (!type.Name.EndsWith("Repository"))
+                    continue;
 
-            //    foreach (var iface in type.GetInterfaces())
-            //    {
-            //        if (iface.Name.EndsWith("Repository"))
-            //        {
-            //            services.AddScoped(iface, type);
-            //        }
-            //    }
-            //}
+                foreach (var iface in type.GetInterfaces())
+                {
+                    if (iface.Name.EndsWith("Repository"))
+                    {
+                        services.AddScoped(iface, type);
+                    }
+                }
+            }
 
             // ── Services ─────────────────────────────────────────────────────
             services.AddScoped<IUnitOfWork, UnitOfWork>();
